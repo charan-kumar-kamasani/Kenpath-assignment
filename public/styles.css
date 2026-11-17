@@ -131,3 +131,5 @@ input[type=checkbox] { display: inline-block; width: 1.3rem; height: 1.3rem; mar
   .who { display: none; }
   .btn.lg { flex: 1 1 100%; }
 }
+
+.alert.info { background: #e7effc; color: #234c9a; }

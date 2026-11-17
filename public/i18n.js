@@ -42,6 +42,7 @@ const DICT = {
     saved: 'సేవ్ అయింది', error: 'ఏదో పొరపాటు జరిగింది', e_override_note_required: 'హెచ్చరికలు ఉన్నాయి — గమనిక రాయండి',
     e_verify_all_required: 'అన్ని పత్రాలను సరిచూసినట్లు టిక్ చేయండి', e_invalid_damage: 'నష్టం 0–100 మధ్య ఉండాలి', e_invalid_date: 'తేదీ సరిగా లేదు',
     e_invalid_area: 'విస్తీర్ణం సరిగా లేదు', e_reason_required: 'కారణం రాయండి', e_missing_required_docs: 'తప్పనిసరి పత్రాలు లేవు',
+    maoOnly: 'ఈ దశను మండల వ్యవసాయ అధికారి (MAO) పూర్తి చేస్తారు. మీరు దరఖాస్తును తిరిగి పంపవచ్చు.', e_forbidden_role: 'ఈ చర్య MAO కు మాత్రమే అనుమతి',
     impactDemo: 'డెమో డేటా', aiOn: 'AI: Claude', aiOff: 'AI: నియమాల ఆధారిత (API కీ లేదు)',
   },
   en: {
@@ -86,6 +87,7 @@ const DICT = {
     saved: 'Saved', error: 'Something went wrong', e_override_note_required: 'There are alerts — please add a note',
     e_verify_all_required: 'Tick all documents as checked', e_invalid_damage: 'Loss must be 0–100', e_invalid_date: 'Invalid date',
     e_invalid_area: 'Invalid area', e_reason_required: 'Please write a reason', e_missing_required_docs: 'Required documents are missing',
+    maoOnly: 'This step is completed by the Mandal Agriculture Officer (MAO). You can still return the application.', e_forbidden_role: 'Only the MAO can do this',
     impactDemo: 'Demo data', aiOn: 'AI: Claude', aiOff: 'AI: rule-based (no API key)',
   },
 };

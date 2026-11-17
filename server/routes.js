@@ -9,6 +9,8 @@ import { narrate } from './ai.js';
 
 export const api = express.Router();
 const bad = (res, msg, code = 400) => res.status(code).json({ error: msg });
+// Field officers (AEO) do steps 1-2 and may return a case; only the MAO sanctions (steps 3-4, approve, reject).
+const isMao = (req, res) => (req.user.role === 'MAO' ? true : (bad(res, 'forbidden_role', 403), false));
 
 // ---------- auth ----------
 api.post('/login', (req, res) => {
@@ -128,6 +130,7 @@ api.post('/applications/:id/steps/2', (req, res) => {
 
 // ---------- step 3: eligibility (computed by rules, officer confirms area) ----------
 api.post('/applications/:id/steps/3', (req, res) => {
+  if (!isMao(req, res)) return;
   const app = getApp(req.params.id);
   if (!mustBeWorkable(app, res)) return;
   if (app.current_step !== 3) return bad(res, 'wrong_step');
@@ -145,6 +148,7 @@ api.post('/applications/:id/decision', (req, res) => {
   if (!mustBeWorkable(app, res)) return;
   const { decision, reason } = req.body || {};
   if (!['approve', 'reject', 'return'].includes(decision)) return bad(res, 'invalid_decision');
+  if (decision !== 'return' && !isMao(req, res)) return;
   const why = String(reason || '').trim();
   if (decision !== 'approve' && !why) return bad(res, 'reason_required');
   if (decision === 'approve') {

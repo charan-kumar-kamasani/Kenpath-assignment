@@ -32,7 +32,9 @@ A worker logs in and sees a **priority queue**: overdue cases first, then those 
 - **Reject or return is available at any step**; approve only after all steps and only if eligible.
 - **History**: every action (who, when, step, reason, amount) and every use of AI is logged per application, including whether the officer followed the AI's suggestion.
 - A returned application can be **reopened** once the farmer corrects it.
-- Telugu by default, English toggle for supervisors. Big touch targets, mobile-first layout.
+- > **Policy figures are demo assumptions.** The 33% threshold, 2 ha cap, per-hectare rates (₹8,500 / ₹17,000 / ₹22,500) and 15-day SLA are modelled on the general SDRF/NDRF input-subsidy structure but are **not verified Andhra Pradesh figures**. They live in one file (`server/rules.js`) so an officer can replace them with the current government order.
+
+Telugu by default, English toggle for supervisors. Big touch targets, mobile-first layout.
 
 ## 3. Where AI helps and why
 
@@ -68,6 +70,7 @@ Why I expect it to work: delay comes mostly from **not knowing what is urgent** 
 - **No front-end build step.** A small vanilla ES-module SPA (`public/`) keeps the bundle tiny for low-bandwidth phones and makes the code easy to read. State is a single object and rendering is pure functions.
 - **Rules vs. AI split** (see §3). The LLM receives already-verified facts as JSON and is told it may not change numbers; output is validated as `{te, en}` JSON and falls back to templates on any failure.
 - **Bilingual by construction.** The server returns flag messages in both languages; the UI string table lives in `public/i18n.js`. Telugu is default, copy kept in simple spoken register.
+- **Roles.** AEO (field officer) completes steps 1–2 and may return a case; only the MAO can run steps 3–4, approve or reject. Enforced on the server (403), not just hidden in the UI.
 - **Officer-in-control by design.** Server enforces step order, requires an explanatory note to proceed past high-severity flags, forbids approval of ineligible cases, and records `ai_recommended` vs. actual decision.
 - **Auth:** scrypt-hashed passwords, random server-side session tokens in an `HttpOnly` cookie.
 - **Priority score** (`priorityOf`): overdue > due ≤3 days > flagged > ready to decide.
@@ -86,10 +89,10 @@ npm start                 # http://localhost:3000
 Login with `mao` / `Rythu@2026`. The database is created and seeded with 12 sample applications on first start. Reset it any time with `npm run seed`.
 
 ```bash
-npm test                  # unit tests for eligibility, flags, priority, recommendation
+npm test                  # unit tests (rules) + API integration tests (login, roles, full workflow, audit history)
 ```
 
-With an API key: `ANTHROPIC_API_KEY=sk-ant-... npm start` (model via `ANTHROPIC_MODEL`, default `claude-haiku-5-5`).
+With an API key: `ANTHROPIC_API_KEY=sk-ant-... npm start` (model via `ANTHROPIC_MODEL`, default `claude-sonnet-5-5`).
 
 ### Deploy
 

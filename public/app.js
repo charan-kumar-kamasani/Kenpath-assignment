@@ -201,6 +201,9 @@ function aiBox(kind, label, extraBody = null) {
 
 function stepPanel(a) {
   const n = a.current_step;
+  if (n >= 3 && S.user.role !== 'MAO') {
+    return `<section class="card step"><h2><span class="num">${n}</span> ${t('steps')[n - 1]}</h2><p class="alert info">${t('maoOnly')}</p></section>`;
+  }
   const body = [null, docsStep, inspectionStep, eligibilityStep, decisionStep][n](a);
   return `<section class="card step"><h2><span class="num">${n}</span> ${t('steps')[n - 1]}</h2>${body}</section>`;
 }
@@ -277,7 +280,8 @@ function decisionStep(a) {
 }
 
 function decisionBar(a) {
-  const canApprove = a.current_step === 4 && a.eligibility?.eligible;
+  const mao = S.user.role === 'MAO';
+  const canApprove = mao && a.current_step === 4 && a.eligibility?.eligible;
   if (S.decideMode) {
     const m = S.decideMode;
     return `<section class="card decide"><h3>${t(m === 'approve' ? 'approve' : m === 'reject' ? 'reject' : 'returnApp')}</h3>
@@ -292,7 +296,7 @@ function decisionBar(a) {
     <div class="actions">
       ${canApprove ? `<button class="btn primary lg" data-act="decide" data-mode="approve">✔ ${t('approve')}</button>` : ''}
       <button class="btn warnbtn lg" data-act="decide" data-mode="return">↩ ${t('returnApp')}</button>
-      <button class="btn danger lg" data-act="decide" data-mode="reject">✖ ${t('reject')}</button>
+      ${mao ? `<button class="btn danger lg" data-act="decide" data-mode="reject">✖ ${t('reject')}</button>` : ''}
     </div></section>`;
 }
 

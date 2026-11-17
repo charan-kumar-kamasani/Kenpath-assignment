@@ -4,7 +4,7 @@
 // so the workflow never blocks on AI.
 
 const KEY = () => process.env.ANTHROPIC_API_KEY;
-const MODEL = () => process.env.ANTHROPIC_MODEL || 'claude-haiku-5-5';
+const MODEL = () => process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5';
 
 const SYSTEM = `You assist a Mandal Agriculture Officer in Andhra Pradesh processing crop-loss input-subsidy applications.
 You are given verified FACTS computed by a rule engine. Write short, plain, respectful text for a busy field officer.
