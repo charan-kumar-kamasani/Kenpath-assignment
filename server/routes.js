@@ -182,6 +182,7 @@ api.post('/applications/:id/ai/:kind', async (req, res) => {
   const app = getApp(req.params.id);
   if (!mustBeWorkable(app, res)) return;
   const { kind } = req.params;
+  if ((kind === 'eligibility' || kind === 'decision') && !isMao(req, res)) return;
   let facts, fallback, step;
 
   if (kind === 'docs') {

@@ -40,6 +40,9 @@ test('AEO cannot approve, reject or run eligibility; MAO can', async () => {
   assert.equal((await req('POST', '/applications/6/decision', { cookie: aeo, body: { decision: 'approve' } })).status, 403);
   assert.equal((await req('POST', '/applications/6/decision', { cookie: aeo, body: { decision: 'reject', reason: 'x' } })).status, 403);
   assert.equal((await req('POST', '/applications/5/steps/3', { cookie: aeo, body: { verified_area_ha: 1 } })).status, 403);
+  assert.equal((await req('POST', '/applications/6/ai/decision', { cookie: aeo })).status, 403);
+  assert.equal((await req('POST', '/applications/5/ai/eligibility', { cookie: aeo, body: { verified_area_ha: 1 } })).status, 403);
+  assert.equal((await req('POST', '/applications/1/ai/docs', { cookie: aeo })).status, 200); // AI help for steps 1-2 stays open to AEO
 });
 
 test('full workflow: steps in order, AI assist, approve, audit history', async () => {
