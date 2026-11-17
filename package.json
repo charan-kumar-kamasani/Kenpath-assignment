@@ -1,0 +1,17 @@
+{
+  "name": "rythu-seva",
+  "version": "1.0.0",
+  "description": "రైతు సేవ — crop-loss input subsidy workflow for Mandal Agriculture Officers (Telugu-first)",
+  "type": "module",
+  "main": "server/index.js",
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "seed": "node server/seed.js --reset",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
