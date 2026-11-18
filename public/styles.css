@@ -47,7 +47,8 @@ input[type=checkbox] { display: inline-block; width: 1.3rem; height: 1.3rem; mar
 
 /* cards */
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem 1.1rem; margin: 1rem 0; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .7rem; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin-bottom: 1.4rem; }
+@media (min-width: 900px) { .stats { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: .7rem 1rem; }
 .stat b { display: block; font-size: 1.9rem; line-height: 1.1; } .stat span { color: var(--mute); font-size: .85rem; }
 .stat.bad { border-color: var(--red); background: var(--red-l); } .stat.bad b { color: var(--red); }
