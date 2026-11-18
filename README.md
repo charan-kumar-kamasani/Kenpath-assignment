@@ -4,7 +4,7 @@ A Telugu-first workflow tool for **Mandal Agriculture Officers (MAO) and Agricul
 
 > Built for the Kenpath Full Stack AI Engineer assignment. Demo data is fictional.
 
-**Live demo:** _add your deployed URL here_ · **Login:** `mao` / `Rythu@2026` (also `aeo` / `Rythu@2026`)
+**Live demo:** http://50.6.44.77:3002 · **Logins:** `mao` / `Rythu@2026` (Mandal Agriculture Officer, full access) · `aeo` / `Rythu@2026` (Extension Officer, steps 1–2 + return)
 
 ---
 
@@ -95,6 +95,10 @@ npm test                  # unit tests (rules) + API integration tests (login, r
 With an API key: `ANTHROPIC_API_KEY=sk-ant-... npm start` (model via `ANTHROPIC_MODEL`, default `claude-sonnet-5-5`).
 
 ### Deploy
+
+**VPS with pm2 (what the live demo uses):** upload the project, then run `bash deploy/server-setup.sh` on the server — it installs Node/pm2 if needed, picks a free port, starts the app and prints the URL.
+
+**Docker / Render:**
 
 A `Dockerfile` and `render.yaml` are included. On [Render](https://render.com): *New → Blueprint* → pick this repo, set `ANTHROPIC_API_KEY` (optional). The SQLite file lives in `/data`; the free tier is ephemeral, so data re-seeds on restart — fine for a demo, attach a disk for anything real.
 
